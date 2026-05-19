@@ -134,7 +134,7 @@ registrations (
 
 ## 🔐 Admin Dashboard
 
-Visit `/admin` → enter password: **mazen2025**
+Visit `/admin` → enter password
 
 Features:
 - Total registrations + today's count
