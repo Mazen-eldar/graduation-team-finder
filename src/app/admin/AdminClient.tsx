@@ -6,7 +6,7 @@ import {
   BarChart, Bar, XAxis, YAxis, Tooltip, ResponsiveContainer,
   PieChart, Pie, Cell, Legend,
 } from 'recharts'
-import type { AdminStats as _AdminStats } from '@/types'
+
 
 const DEPT_COLORS: Record<string, string> = {
   CS: '#00f5ff',
