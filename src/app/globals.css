@@ -1,0 +1,240 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* ── Fonts ──────────────────────────────────────────────────────────────────── */
+@import url('https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;900&family=Space+Grotesk:wght@400;500;600;700&display=swap');
+
+/* ── CSS Custom Properties ──────────────────────────────────────────────────── */
+:root {
+  --neon-cyan: #00f5ff;
+  --neon-purple: #b44fff;
+  --neon-green: #39ff14;
+  --neon-pink: #ff2d78;
+  --neon-orange: #ff6a00;
+
+  --bg-900: #020208;
+  --bg-800: #060610;
+  --bg-700: #0a0a1a;
+  --bg-600: #0f0f24;
+  --bg-500: #14142e;
+
+  --glass: rgba(255, 255, 255, 0.04);
+  --glass-hover: rgba(255, 255, 255, 0.07);
+  --glass-border: rgba(255, 255, 255, 0.08);
+  --glass-border-hover: rgba(255, 255, 255, 0.16);
+
+  --text: #e8e8f0;
+  --text-dim: #6b6b8a;
+  --text-muted: #4a4a6a;
+
+  --font-cairo: 'Cairo', sans-serif;
+  --font-grotesk: 'Space Grotesk', sans-serif;
+}
+
+/* ── Base Reset ─────────────────────────────────────────────────────────────── */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  scroll-behavior: smooth;
+  direction: rtl;
+  font-size: 16px;
+}
+
+body {
+  background: var(--bg-800);
+  color: var(--text);
+  font-family: var(--font-cairo);
+  overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* ── Scrollbar ──────────────────────────────────────────────────────────────── */
+::-webkit-scrollbar {
+  width: 6px;
+}
+::-webkit-scrollbar-track {
+  background: var(--bg-800);
+}
+::-webkit-scrollbar-thumb {
+  background: linear-gradient(to bottom, var(--neon-cyan), var(--neon-purple));
+  border-radius: 3px;
+}
+
+/* ── Selection ──────────────────────────────────────────────────────────────── */
+::selection {
+  background: rgba(0, 245, 255, 0.2);
+  color: var(--neon-cyan);
+}
+
+/* ── Focus ──────────────────────────────────────────────────────────────────── */
+:focus-visible {
+  outline: 2px solid var(--neon-cyan);
+  outline-offset: 2px;
+  border-radius: 4px;
+}
+
+/* ── Glassmorphism Component ────────────────────────────────────────────────── */
+@layer components {
+  .glass-card {
+    @apply relative overflow-hidden rounded-2xl border;
+    background: var(--glass);
+    border-color: var(--glass-border);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    transition: border-color 0.3s ease, background 0.3s ease, transform 0.3s ease,
+      box-shadow 0.3s ease;
+  }
+
+  .glass-card:hover {
+    background: var(--glass-hover);
+    border-color: var(--glass-border-hover);
+  }
+
+  .neon-text-cyan {
+    background: linear-gradient(135deg, var(--neon-cyan), #00a8ff);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
+  .neon-text-purple {
+    background: linear-gradient(135deg, var(--neon-purple), #7c3aed);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
+  .neon-text-gradient {
+    background: linear-gradient(
+      135deg,
+      var(--neon-cyan) 0%,
+      var(--neon-purple) 50%,
+      var(--neon-pink) 100%
+    );
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
+  .glow-btn {
+    @apply relative overflow-hidden font-bold cursor-pointer border-none;
+    background: linear-gradient(135deg, var(--neon-cyan), var(--neon-purple));
+    color: #000;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+  }
+
+  .glow-btn::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(
+      135deg,
+      transparent,
+      rgba(255, 255, 255, 0.25),
+      transparent
+    );
+    transform: translateX(-100%);
+    transition: transform 0.5s ease;
+  }
+
+  .glow-btn:hover::before {
+    transform: translateX(100%);
+  }
+
+  .glow-btn:hover {
+    transform: translateY(-2px) scale(1.02);
+    box-shadow: 0 0 40px rgba(0, 245, 255, 0.4), 0 0 80px rgba(180, 79, 255, 0.2);
+  }
+
+  .glow-btn:active {
+    transform: translateY(0) scale(0.99);
+  }
+
+  .section-tag {
+    @apply inline-block text-xs font-semibold tracking-widest uppercase mb-4;
+    color: var(--neon-cyan);
+    font-family: var(--font-grotesk);
+    letter-spacing: 0.3em;
+  }
+
+  .neon-input {
+    @apply w-full rounded-xl px-4 py-3 text-base transition-all duration-200 outline-none;
+    background: rgba(255, 255, 255, 0.04);
+    border: 1px solid var(--glass-border);
+    color: var(--text);
+    font-family: var(--font-cairo);
+    direction: rtl;
+  }
+
+  .neon-input:focus {
+    border-color: var(--neon-cyan);
+    box-shadow: 0 0 0 3px rgba(0, 245, 255, 0.1);
+    background: rgba(0, 245, 255, 0.03);
+  }
+
+  .neon-input::placeholder {
+    color: var(--text-dim);
+  }
+}
+
+/* ── Animations ─────────────────────────────────────────────────────────────── */
+@keyframes float {
+  0%, 100% { transform: translateY(0px) scale(1); }
+  50% { transform: translateY(-24px) scale(1.03); }
+}
+
+@keyframes floatReverse {
+  0%, 100% { transform: translateY(-12px) scale(1); }
+  50% { transform: translateY(12px) scale(0.97); }
+}
+
+@keyframes pulseGlow {
+  0%, 100% { opacity: 0.15; }
+  50% { opacity: 0.3; }
+}
+
+@keyframes ringPulse {
+  0% { transform: scale(1); opacity: 1; }
+  100% { transform: scale(1.8); opacity: 0; }
+}
+
+@keyframes particleExplode {
+  0% { transform: translate(0, 0) scale(1); opacity: 1; }
+  100% { transform: var(--dx, 0) var(--dy, 0) scale(0); opacity: 0; }
+}
+
+@keyframes shimmer {
+  from { background-position: -200% center; }
+  to { background-position: 200% center; }
+}
+
+@keyframes gridPulse {
+  0%, 100% { opacity: 0.03; }
+  50% { opacity: 0.06; }
+}
+
+@keyframes scanLine {
+  from { transform: translateY(-100%); }
+  to { transform: translateY(100vh); }
+}
+
+@keyframes countUp {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* ── Utility Overrides ──────────────────────────────────────────────────────── */
+.font-grotesk { font-family: var(--font-grotesk); }
+.font-cairo { font-family: var(--font-cairo); }
+
+/* RTL-safe text alignment */
+.text-start { text-align: start; }
+.text-end { text-align: end; }
