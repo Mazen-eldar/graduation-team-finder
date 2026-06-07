@@ -63,6 +63,11 @@ export const DEPT_META = {
     color: '#ff2d78', tag: 'FUTURE IS NOW',
     glow: 'rgba(255,45,120,0.25)', border: 'rgba(255,45,120,0.4)',
   },
+  Credit: {
+    label: 'Credit', full: 'Credit Hours', icon: '💳',
+    color: '#ffd700', tag: 'CREDIT SYSTEM',
+    glow: 'rgba(255,215,0,0.25)', border: 'rgba(255,215,0,0.4)',
+  },
 } as const
 
 // ── Level metadata ───────────────────────────────────────────────────────────
