@@ -34,6 +34,7 @@ export interface Registration {
   show_on_board: boolean
   avatar_seed: string
   created_at: string
+   note?: string
 }
 
 export interface RegistrationInput {
@@ -47,6 +48,7 @@ export interface RegistrationInput {
   rescue_percentage: number
   show_on_board: boolean
   avatar_seed: string
+  note?: string
 }
 
 export interface DeptStats {
