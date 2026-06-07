@@ -1,11 +1,8 @@
 import { create } from 'zustand'
 import type { Department, Level, ContactMethod, SkillNeeded } from '@/types'
-
 interface FormState {
   step: number
   setStep: (step: number) => void
-
-  // Fields
   name: string
   department: Department | null
   track: string
@@ -13,10 +10,10 @@ interface FormState {
   skillsNeeded: SkillNeeded[]
   contactMethod: ContactMethod | null
   contactValue: string
+  note: string
   rescuePercentage: number
   showOnBoard: boolean
   avatarSeed: string
-
   setName: (v: string) => void
   setDepartment: (v: Department) => void
   setTrack: (v: string) => void
@@ -24,22 +21,19 @@ interface FormState {
   toggleSkill: (v: SkillNeeded) => void
   setContactMethod: (v: ContactMethod) => void
   setContactValue: (v: string) => void
+  setNote: (v: string) => void
   setRescuePercentage: (v: number) => void
   setShowOnBoard: (v: boolean) => void
   setAvatarSeed: (v: string) => void
-
-  // UI
   isSubmitting: boolean
   isSuccess: boolean
   setIsSubmitting: (v: boolean) => void
   setIsSuccess: (v: boolean) => void
   reset: () => void
 }
-
 export const useFormStore = create<FormState>((set) => ({
   step: 1,
   setStep: (step) => set({ step }),
-
   name: '',
   department: null,
   track: '',
@@ -47,10 +41,10 @@ export const useFormStore = create<FormState>((set) => ({
   skillsNeeded: [],
   contactMethod: null,
   contactValue: '',
+  note: '',
   rescuePercentage: 0,
   showOnBoard: true,
   avatarSeed: '',
-
   setName: (name) => set({ name }),
   setDepartment: (department) => set({ department, step: 2 }),
   setTrack: (track) => set({ track }),
@@ -63,15 +57,14 @@ export const useFormStore = create<FormState>((set) => ({
     })),
   setContactMethod: (contactMethod) => set({ contactMethod }),
   setContactValue: (contactValue) => set({ contactValue }),
+  setNote: (note) => set({ note }),
   setRescuePercentage: (rescuePercentage) => set({ rescuePercentage }),
   setShowOnBoard: (showOnBoard) => set({ showOnBoard }),
   setAvatarSeed: (avatarSeed) => set({ avatarSeed }),
-
   isSubmitting: false,
   isSuccess: false,
   setIsSubmitting: (isSubmitting) => set({ isSubmitting }),
   setIsSuccess: (isSuccess) => set({ isSuccess }),
-
   reset: () =>
     set({
       step: 1,
@@ -82,6 +75,7 @@ export const useFormStore = create<FormState>((set) => ({
       skillsNeeded: [],
       contactMethod: null,
       contactValue: '',
+      note: '',
       rescuePercentage: 0,
       showOnBoard: true,
       avatarSeed: '',
