@@ -42,6 +42,7 @@ export function FormSection() {
     skillsNeeded,
     contactMethod, setContactMethod,
     contactValue, setContactValue,
+    note, setNote,
     showOnBoard,
     setRescuePercentage,
     setAvatarSeed,
@@ -75,10 +76,10 @@ export function FormSection() {
         rescue_percentage: pct,
         show_on_board: showOnBoard,
         avatar_seed: seed,
+        note: note.trim(),
       })
       setIsSuccess(true)
     } catch {
-      // Demo mode — always show success even without Supabase
       setIsSuccess(true)
     } finally {
       setIsSubmitting(false)
@@ -87,7 +88,6 @@ export function FormSection() {
 
   return (
     <section ref={ref} id="form-section" className="relative z-10 py-16 sm:py-20 px-4 sm:px-6">
-      {/* Header */}
       <motion.div
         className="text-center mb-8 sm:mb-12"
         initial={{ opacity: 0, y: 30 }}
@@ -106,7 +106,6 @@ export function FormSection() {
         </h2>
       </motion.div>
 
-      {/* Progress stepper */}
       <motion.div
         className="flex items-center justify-center gap-2 mb-8 sm:mb-10"
         initial={{ opacity: 0 }}
@@ -139,14 +138,12 @@ export function FormSection() {
         ))}
       </motion.div>
 
-      {/* Form card */}
       <motion.div
         className="glass-card max-w-xl mx-auto p-5 sm:p-8 md:p-12"
         initial={{ opacity: 0, y: 40 }}
         animate={isInView ? { opacity: 1, y: 0 } : {}}
         transition={{ delay: 0.3, duration: 0.7, ease: [0.22, 1, 0.36, 1] }}
       >
-        {/* Name */}
         <FormGroup label="اسمك الكريم 👑">
           <input
             className="neon-input"
@@ -156,7 +153,6 @@ export function FormSection() {
           />
         </FormGroup>
 
-        {/* Department (read-only, linked to card section above) */}
         <FormGroup
           label="القسم المختار 🏫"
           helper={!department ? 'اختر القسم من فوق الأول 👆' : undefined}
@@ -178,7 +174,6 @@ export function FormSection() {
           </div>
         </FormGroup>
 
-        {/* Track */}
         <FormGroup
           label="التراك بتاعك 🛤️"
           helper="متخجلش… كلنا بدأنا من تراك معرفناش 😭"
@@ -191,7 +186,6 @@ export function FormSection() {
           />
         </FormGroup>
 
-        {/* Level */}
         <FormGroup label="مستواك الحالي 📊">
           <div className="grid grid-cols-2 sm:grid-cols-3 gap-2">
             {LEVELS.map((lvl) => {
@@ -232,7 +226,6 @@ export function FormSection() {
           </AnimatePresence>
         </FormGroup>
 
-        {/* Contact method */}
         <FormGroup label="وسيلة التواصل 📱">
           <div className="grid grid-cols-2 sm:grid-cols-3 gap-2 mb-3">
             {CONTACT_METHODS.map((method) => (
@@ -283,33 +276,9 @@ export function FormSection() {
           </AnimatePresence>
         </FormGroup>
 
-        {/* Submit button */}
-        <MagneticButton
-          className="glow-btn w-full py-3.5 sm:py-4 rounded-2xl text-base sm:text-lg font-black mt-2"
-          style={{ fontFamily: 'var(--font-cairo)' }}
-          onClick={handleSubmit}
-          disabled={isSubmitting}
-        >
-          {isSubmitting ? (
-            <span className="flex items-center justify-center gap-3">
-              <motion.span
-                animate={{ rotate: 360 }}
-                transition={{ duration: 1, repeat: Infinity, ease: 'linear' }}
-                style={{ display: 'inline-block' }}
-              >
-                ⏳
-              </motion.span>
-              جاري الإنقاذ...
-            </span>
-          ) : (
-            'سجلني يا منقذ ✅'
-          )}
-        </MagneticButton>
-
-        <p className="text-center text-xs mt-4" style={{ color: 'var(--text-muted)' }}>
-          بياناتك آمنة مع مازن المنقذ™ — لن يُساء استخدامها أبدًا 🛡️
-        </p>
-      </motion.div>
-    </section>
-  )
-}
+        {/* Note */}
+        <FormGroup label="ملاحظة إضافية 📝">
+          <textarea
+            className="neon-input"
+            placeholder="مثال: عندي تيم ناقصنا واحد، أو بدور على تيم من نفس القسم..."
+            rows={3}
