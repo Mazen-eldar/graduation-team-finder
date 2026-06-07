@@ -13,6 +13,7 @@ const DEPT_COLORS: Record<string, string> = {
   SC: '#b44fff',
   IS: '#39ff14',
   AI: '#ff2d78',
+  Credit: '#ffd700',
 }
 
 async function fetchAdminStats(): Promise<import('@/types').AdminStats> {
