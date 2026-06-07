@@ -1,4 +1,4 @@
-export type Department = 'CS' | 'SC' | 'IS' | 'AI'
+export type Department = 'CS' | 'SC' | 'IS' | 'AI' | 'Credit''
 
 export type Level =
   | 'لسه بتعلم'
